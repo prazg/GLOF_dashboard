@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: "HMAGLOFDB review: cleaned data, quality report and version diff"
+message: "If you use this repository, please cite both it and the underlying ICIMOD dataset."
+type: software
+authors:
+  - family-names: "Ghimire"
+    given-names: "Prajwal"
+repository-code: "https://github.com/prazg/GLOF_dashboard"
+url: "https://prazg.github.io/GLOF_dashboard/"
+abstract: >-
+  A cleaned, analysis-ready copy of HMAGLOFDB v4.0 (ICIMOD's inventory of glacial lake
+  outburst floods in High Mountain Asia), a 17-point data quality report, and a diff
+  across the v1.0 to v4.0 releases, presented as a self-contained interactive dashboard.
+keywords:
+  - GLOF
+  - glacial lake outburst flood
+  - High Mountain Asia
+  - Himalaya
+  - cryosphere
+  - data quality
+license: MIT
+license-url: "https://github.com/prazg/GLOF_dashboard/blob/main/LICENSE-DATA.md"
+references:
+  - type: data
+    title: "GLOF database of High Mountain Asia"
+    authors:
+      - name: "International Centre for Integrated Mountain Development (ICIMOD)"
+    year: 2025
+    doi: "10.26066/RDS.1973283"
+    license: CC-BY-4.0
