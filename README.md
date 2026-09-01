@@ -6,11 +6,7 @@ diff across the four annual releases from 2022 to 2025.
 
 **Dashboard: https://prazg.github.io/GLOF_dashboard/**
 
-The dashboard is one self-contained HTML file. All data is inlined, so it makes no network requests
-and works offline once downloaded.
-
 ---
-
 ## Why this exists
 
 HMAGLOFDB is the most complete GLOF inventory available for the region and is published openly under
