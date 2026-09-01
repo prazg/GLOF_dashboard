@@ -1,4 +1,4 @@
-# HMAGLOFDB review
+# Inventory of glacial lake outburst floods (GLOFs) in High Mountain Asia 2022-2025 | HMAGLOFDB review
 
 An interactive review of the **HMAGLOFDB**, ICIMOD's inventory of glacial lake outburst floods
 (GLOFs) in High Mountain Asia: across the four annual releases from 2022 to 2025.
