@@ -1,0 +1,1454 @@
+{
+  "matched_key": "lake coordinate (4 dp) + Year_approx + Month + Day",
+  "gfid_stability": 0.1607,
+  "n_carried": 688,
+  "steps": [
+    {
+      "from": "v1.0",
+      "to": "v2.0",
+      "n_from": 697,
+      "n_to": 703,
+      "net": 6,
+      "added": 6,
+      "unmatched": 0,
+      "new_events": [
+        {
+          "Lake_name": "Dagongba",
+          "Glacier_name": "Dagongba",
+          "Country": "China",
+          "Year_approx": "2018",
+          "Month": "7",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Unnamed",
+          "Glacier_name": "Unnamed",
+          "Country": "China",
+          "Year_approx": "July to August 2017",
+          "Month": "",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Unnamed",
+          "Glacier_name": "Unnamed",
+          "Country": "China",
+          "Year_approx": "2005",
+          "Month": "11",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Unnamed",
+          "Glacier_name": "Unnamed",
+          "Country": "Nepal",
+          "Year_approx": "2015",
+          "Month": "5",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "South Lhonak",
+          "Glacier_name": "South Lhonak",
+          "Country": "India",
+          "Year_approx": "2023",
+          "Month": "10",
+          "Day": "4",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": "102"
+        },
+        {
+          "Lake_name": "Thorthormi",
+          "Glacier_name": "Thorthormi",
+          "Country": "Bhutan",
+          "Year_approx": "2023",
+          "Month": "10",
+          "Day": "30",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        }
+      ],
+      "unmatched_records": []
+    },
+    {
+      "from": "v2.0",
+      "to": "v3.0",
+      "n_from": 703,
+      "n_to": 736,
+      "net": 33,
+      "added": 34,
+      "unmatched": 1,
+      "new_events": [
+        {
+          "Lake_name": "Gongbatongsha Co",
+          "Glacier_name": "Unnamed",
+          "Country": "China",
+          "Year_approx": "2016",
+          "Month": "7",
+          "Day": "5",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Kyzyl-Djar",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1958",
+          "Month": "7",
+          "Day": "15",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Chon Kyzyl Su",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1959",
+          "Month": "6",
+          "Day": "5",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Chon Kyzyl Su",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1966",
+          "Month": "10",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Chon Kyzyl Su",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1966",
+          "Month": "7",
+          "Day": "11",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Tamga",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1964",
+          "Month": "8",
+          "Day": "12",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Tosor",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1995",
+          "Month": "7",
+          "Day": "9",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Kurumdy",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "2015",
+          "Month": "7",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Suyuk Tor",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "2005",
+          "Month": "",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Chon Koisuu",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1994",
+          "Month": "6",
+          "Day": "14",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Koltor",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "2013",
+          "Month": "7",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Choktal-1",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1978",
+          "Month": "9",
+          "Day": "27",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Choktal-2",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1999",
+          "Month": "9",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Buzulgansuu",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1987",
+          "Month": "7",
+          "Day": "",
+          "Lake_type": "Ice dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Buzulgansuu",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "2006",
+          "Month": "",
+          "Day": "",
+          "Lake_type": "Ice dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "At-Djailoo",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1968",
+          "Month": "7",
+          "Day": "13",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Teketor",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1953",
+          "Month": "8",
+          "Day": "16",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Teketor",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1978",
+          "Month": "8",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Takyrtor",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1992",
+          "Month": "6",
+          "Day": "4",
+          "Lake_type": "Supraglacial",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Takyrtor",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1999",
+          "Month": "6",
+          "Day": "4",
+          "Lake_type": "Supraglacial",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Akpay",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "2020",
+          "Month": "8",
+          "Day": "2",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Keidy Kuchkach",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1980",
+          "Month": "7",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Keidy Kuchkach",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1983",
+          "Month": "8",
+          "Day": "12",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Isha",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1968",
+          "Month": "6",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Djery Kaindy",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1995",
+          "Month": "",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Tegermach South",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1999",
+          "Month": "7",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Tegermach North",
+          "Glacier_name": "Unknown",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1977",
+          "Month": "7",
+          "Day": "",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Chamai",
+          "Glacier_name": "Chamai",
+          "Country": "China",
+          "Year_approx": "2021",
+          "Month": "10",
+          "Day": "5",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Ghulkin",
+          "Glacier_name": "Ghulkin",
+          "Country": "Pakistan",
+          "Year_approx": "2024",
+          "Month": "3",
+          "Day": "29",
+          "Lake_type": "Supraglacial",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Bhairav Taal",
+          "Glacier_name": "Dorji Phungmo",
+          "Country": "Nepal",
+          "Year_approx": "2024",
+          "Month": "7",
+          "Day": "5",
+          "Lake_type": "Unknown",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Birendra Taal",
+          "Glacier_name": "Manaslu",
+          "Country": "Nepal",
+          "Year_approx": "2024",
+          "Month": "4",
+          "Day": "21",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Tomutse Lake",
+          "Glacier_name": "Thyangbo",
+          "Country": "Nepal",
+          "Year_approx": "2024",
+          "Month": "8",
+          "Day": "16",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Dih",
+          "Glacier_name": "Unknown",
+          "Country": "Pakistan",
+          "Year_approx": "2024",
+          "Month": "8",
+          "Day": "12",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Shahzore",
+          "Glacier_name": "Shahzore",
+          "Country": "Pakistan",
+          "Year_approx": "2024",
+          "Month": "8",
+          "Day": "30",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        }
+      ],
+      "unmatched_records": [
+        {
+          "lake": "Gongbatongsha Co",
+          "glacier": "Unnamed",
+          "country": "China",
+          "year": "2016",
+          "month": "5",
+          "day": "7",
+          "verdict": "date or name refined",
+          "n_at_site": 4,
+          "match_lake": "Gongbatongsha Co",
+          "match_year": "2016",
+          "match_month": "7",
+          "match_day": "5",
+          "km": 0.0
+        }
+      ]
+    },
+    {
+      "from": "v3.0",
+      "to": "v4.0",
+      "n_from": 736,
+      "n_to": 766,
+      "net": 30,
+      "added": 39,
+      "unmatched": 9,
+      "new_events": [
+        {
+          "Lake_name": "Unknown",
+          "Glacier_name": "Gurpi",
+          "Country": "Pakistan",
+          "Year_approx": "1910",
+          "Month": "",
+          "Day": "",
+          "Lake_type": "Unknown",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake number 2",
+          "Glacier_name": "Central Tuyuksu",
+          "Country": "Kazakhstan",
+          "Year_approx": "1927",
+          "Month": "8",
+          "Day": "8",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake number 2",
+          "Glacier_name": "Central Tuyuksu",
+          "Country": "Kazakhstan",
+          "Year_approx": "1951",
+          "Month": "8",
+          "Day": "20",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake number 2",
+          "Glacier_name": "Central Tuyuksu",
+          "Country": "Kazakhstan",
+          "Year_approx": "1956",
+          "Month": "8",
+          "Day": "7",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Merzbacher",
+          "Glacier_name": "Southern Inylshek",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "1956",
+          "Month": "9",
+          "Day": "2",
+          "Lake_type": "Ice dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake 8",
+          "Glacier_name": "Togyzak",
+          "Country": "Kazakhstan",
+          "Year_approx": "1961",
+          "Month": "7",
+          "Day": "26",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake 8",
+          "Glacier_name": "Togyzak",
+          "Country": "Kazakhstan",
+          "Year_approx": "1961",
+          "Month": "8",
+          "Day": "19",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake 5",
+          "Glacier_name": "Kalesnika",
+          "Country": "Kazakhstan",
+          "Year_approx": "1965",
+          "Month": "7",
+          "Day": "25",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "South East Talgar",
+          "Glacier_name": "Akgul",
+          "Country": "Kazakhstan",
+          "Year_approx": "1968",
+          "Month": "7",
+          "Day": "22",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake 5",
+          "Glacier_name": "Kalesnika",
+          "Country": "Kazakhstan",
+          "Year_approx": "1970",
+          "Month": "6",
+          "Day": "20",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Ozernaya",
+          "Glacier_name": "Sovetov",
+          "Country": "Kazakhstan",
+          "Year_approx": "1975",
+          "Month": "8",
+          "Day": "18",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Sol Talgar",
+          "Glacier_name": "Unnamed",
+          "Country": "Kazakhstan",
+          "Year_approx": "1976",
+          "Month": "6",
+          "Day": "24",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake 5",
+          "Glacier_name": "Kalesnika",
+          "Country": "Kazakhstan",
+          "Year_approx": "1976",
+          "Month": "7",
+          "Day": "10",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake number 17",
+          "Glacier_name": "Zharsai",
+          "Country": "Kazakhstan",
+          "Year_approx": "1977",
+          "Month": "7",
+          "Day": "12",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Kumbelsu",
+          "Glacier_name": "Sovetov",
+          "Country": "Kazakhstan",
+          "Year_approx": "1977",
+          "Month": "8",
+          "Day": "31",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": "+"
+        },
+        {
+          "Lake_name": "Lake number 17",
+          "Glacier_name": "Zharsai",
+          "Country": "Kazakhstan",
+          "Year_approx": "1980",
+          "Month": "6",
+          "Day": "6",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Kokbulak (Lake 20)",
+          "Glacier_name": "Unnamed",
+          "Country": "Kazakhstan",
+          "Year_approx": "1980",
+          "Month": "6",
+          "Day": "6",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake number 2",
+          "Glacier_name": "Central Tuyuksu",
+          "Country": "Kazakhstan",
+          "Year_approx": "1981",
+          "Month": "6",
+          "Day": "22",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Turgen (Lake 18)",
+          "Glacier_name": "Belaya",
+          "Country": "Kazakhstan",
+          "Year_approx": "1983",
+          "Month": "8",
+          "Day": "5",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake 5",
+          "Glacier_name": "Kalesnika",
+          "Country": "Kazakhstan",
+          "Year_approx": "1984",
+          "Month": "6",
+          "Day": "16",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake 16",
+          "Glacier_name": "Kaskelen",
+          "Country": "Kazakhstan",
+          "Year_approx": "1986",
+          "Month": "7",
+          "Day": "5",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Orta Talgar",
+          "Glacier_name": "Bogdanovicha",
+          "Country": "Kazakhstan",
+          "Year_approx": "1990",
+          "Month": "7",
+          "Day": "7",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake 16",
+          "Glacier_name": "Kaskelen",
+          "Country": "Kazakhstan",
+          "Year_approx": "1992",
+          "Month": "7",
+          "Day": "10",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Sol Talgar",
+          "Glacier_name": "Unnamed",
+          "Country": "Kazakhstan",
+          "Year_approx": "1997",
+          "Month": "7",
+          "Day": "15",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake 16",
+          "Glacier_name": "Kaskelen",
+          "Country": "Kazakhstan",
+          "Year_approx": "2005",
+          "Month": "7",
+          "Day": "4",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Dalonggongba",
+          "Glacier_name": "Unnamed",
+          "Country": "China",
+          "Year_approx": "2005",
+          "Month": "9",
+          "Day": "1",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake Sugat",
+          "Glacier_name": "Said Nafisi/Baralmos",
+          "Country": "Tajikistan",
+          "Year_approx": "2021",
+          "Month": "",
+          "Day": "",
+          "Lake_type": "Supraglacial",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake Sugat",
+          "Glacier_name": "Said Nafisi/Baralmos",
+          "Country": "Tajikistan",
+          "Year_approx": "2022",
+          "Month": "7",
+          "Day": "",
+          "Lake_type": "Supraglacial",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake Sugat",
+          "Glacier_name": "Said Nafisi/Baralmos",
+          "Country": "Tajikistan",
+          "Year_approx": "2023",
+          "Month": "7",
+          "Day": "",
+          "Lake_type": "Supraglacial",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake Sugat",
+          "Glacier_name": "Said Nafisi/Baralmos",
+          "Country": "Tajikistan",
+          "Year_approx": "2024",
+          "Month": "7",
+          "Day": "",
+          "Lake_type": "Supraglacial",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Upper Ngole Cho",
+          "Glacier_name": "Thyangbo",
+          "Country": "Nepal",
+          "Year_approx": "2024",
+          "Month": "8",
+          "Day": "16",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lower Ngole Cho",
+          "Glacier_name": "Thyangbo",
+          "Country": "Nepal",
+          "Year_approx": "2024",
+          "Month": "8",
+          "Day": "16",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Taghanak",
+          "Glacier_name": "Unnamed",
+          "Country": "Afghanistan",
+          "Year_approx": "2025",
+          "Month": "6",
+          "Day": "13",
+          "Lake_type": "Thermokarst",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake Sugat",
+          "Glacier_name": "Said Nafisi/Baralmos",
+          "Country": "Tajikistan",
+          "Year_approx": "2025",
+          "Month": "6",
+          "Day": "14",
+          "Lake_type": "Supraglacial",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Unnamed",
+          "Glacier_name": "Unnamed",
+          "Country": "Pakistan",
+          "Year_approx": "2025",
+          "Month": "6",
+          "Day": "24",
+          "Lake_type": "Ice dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Unnamed",
+          "Glacier_name": "Takyrtor",
+          "Country": "Kyrgyzstan",
+          "Year_approx": "2025",
+          "Month": "6",
+          "Day": "27",
+          "Lake_type": "Moraine dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Unnamed",
+          "Glacier_name": "Purepu",
+          "Country": "China",
+          "Year_approx": "2025",
+          "Month": "7",
+          "Day": "8",
+          "Lake_type": "Supraglacial",
+          "Lives_total": "8"
+        },
+        {
+          "Lake_name": "Unknown",
+          "Glacier_name": "Unnamed",
+          "Country": "Nepal",
+          "Year_approx": "2025",
+          "Month": "7",
+          "Day": "8",
+          "Lake_type": "Ice dammed",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Lake Sugat",
+          "Glacier_name": "Said Nafisi/Baralmos",
+          "Country": "Tajikistan",
+          "Year_approx": "2025",
+          "Month": "8",
+          "Day": "10",
+          "Lake_type": "Supraglacial",
+          "Lives_total": ""
+        },
+        {
+          "Lake_name": "Unknown",
+          "Glacier_name": "Unnamed",
+          "Country": "Pakistan",
+          "Year_approx": "2025",
+          "Month": "8",
+          "Day": "22",
+          "Lake_type": "Thermokarst",
+          "Lives_total": ""
+        }
+      ],
+      "unmatched_records": [
+        {
+          "lake": "Unknown",
+          "glacier": "Gurpi",
+          "country": "Pakistan",
+          "year": "1910",
+          "month": NaN,
+          "day": NaN,
+          "verdict": "date or name refined",
+          "n_at_site": 1,
+          "match_lake": "Unknown",
+          "match_year": "1910",
+          "match_month": NaN,
+          "match_day": NaN,
+          "km": 0.24
+        },
+        {
+          "lake": "Lake number 2",
+          "glacier": "Central Tuyuksu",
+          "country": "Kazakhstan",
+          "year": "1951",
+          "month": "8",
+          "day": "20",
+          "verdict": "date or name refined",
+          "n_at_site": 7,
+          "match_lake": "Lake number 2",
+          "match_year": "1951",
+          "match_month": "8",
+          "match_day": "20",
+          "km": 0.58
+        },
+        {
+          "lake": "Unnamed",
+          "glacier": "Teztor",
+          "country": "Kyrgyzstan",
+          "year": "1953",
+          "month": NaN,
+          "day": NaN,
+          "verdict": "date or name refined",
+          "n_at_site": 10,
+          "match_lake": "Unnamed",
+          "match_year": "1953",
+          "match_month": "6",
+          "match_day": "22",
+          "km": 0.0
+        },
+        {
+          "lake": "Lake number 2",
+          "glacier": "Central Tuyuksu",
+          "country": "Kazakhstan",
+          "year": "1956",
+          "month": "8",
+          "day": "7",
+          "verdict": "date or name refined",
+          "n_at_site": 7,
+          "match_lake": "Lake number 2",
+          "match_year": "1956",
+          "match_month": "8",
+          "match_day": "7",
+          "km": 0.58
+        },
+        {
+          "lake": "Merzbacher",
+          "glacier": "Southern Inylshek",
+          "country": "Kyrgyzstan",
+          "year": "1956",
+          "month": "9",
+          "day": "2",
+          "verdict": "date or name refined",
+          "n_at_site": 85,
+          "match_lake": "Merzbacher",
+          "match_year": "1956",
+          "match_month": "7",
+          "match_day": "2",
+          "km": 0.0
+        },
+        {
+          "lake": "Unnamed",
+          "glacier": "Sovetov",
+          "country": "Kazakhstan",
+          "year": "1975",
+          "month": "8",
+          "day": "19",
+          "verdict": "date or name refined",
+          "n_at_site": 2,
+          "match_lake": "Ozernaya",
+          "match_year": "1975",
+          "match_month": "8",
+          "match_day": "18",
+          "km": 0.0
+        },
+        {
+          "lake": "Unnamed",
+          "glacier": "Sovetov",
+          "country": "Kazakhstan",
+          "year": "1977",
+          "month": "8",
+          "day": "3",
+          "verdict": "date or name refined",
+          "n_at_site": 2,
+          "match_lake": "Kumbelsu",
+          "match_year": "1977",
+          "match_month": "8",
+          "match_day": "31",
+          "km": 0.0
+        },
+        {
+          "lake": "Dalonggongba",
+          "glacier": "Unnamed",
+          "country": "China",
+          "year": "2005",
+          "month": "9",
+          "day": NaN,
+          "verdict": "date or name refined",
+          "n_at_site": 1,
+          "match_lake": "Dalonggongba",
+          "match_year": "2005",
+          "match_month": "9",
+          "match_day": "1",
+          "km": 0.0
+        },
+        {
+          "lake": "Bhairav Taal",
+          "glacier": "Dorji Phungmo",
+          "country": "Nepal",
+          "year": "2024",
+          "month": "7",
+          "day": "5",
+          "verdict": "no nearby record",
+          "n_at_site": 0,
+          "match_lake": "Unnamed",
+          "match_year": NaN,
+          "match_month": NaN,
+          "match_day": NaN,
+          "km": 5.9
+        }
+      ]
+    }
+  ],
+  "field_edits": [
+    {
+      "field": "Province",
+      "n": 276,
+      "pct": 40.1,
+      "examples": [
+        {
+          "from": "Wangduephodrang",
+          "to": "Wangdue Phodrang"
+        },
+        {
+          "from": "Punakha",
+          "to": "Thimphu"
+        },
+        {
+          "from": "TAR",
+          "to": "Punakha"
+        },
+        {
+          "from": "TAR",
+          "to": "Punakha"
+        }
+      ]
+    },
+    {
+      "field": "River_Basin",
+      "n": 173,
+      "pct": 25.1,
+      "examples": [
+        {
+          "from": "Manas",
+          "to": "Dangme Chu"
+        },
+        {
+          "from": "Yarlung Tsangpo",
+          "to": "Subansiri"
+        },
+        {
+          "from": "Nian Chu",
+          "to": "Subansiri"
+        },
+        {
+          "from": "Cona",
+          "to": "Subansiri"
+        }
+      ]
+    },
+    {
+      "field": "Lake_name",
+      "n": 70,
+      "pct": 10.2,
+      "examples": [
+        {
+          "from": "Unnamed",
+          "to": "Unknown"
+        },
+        {
+          "from": "Unknown",
+          "to": "Unnamed"
+        },
+        {
+          "from": "Unnamed",
+          "to": "Unknown"
+        },
+        {
+          "from": "nan",
+          "to": "Unknown"
+        }
+      ]
+    },
+    {
+      "field": "Glacier_name",
+      "n": 31,
+      "pct": 4.5,
+      "examples": [
+        {
+          "from": "Unknown",
+          "to": "Unnamed"
+        },
+        {
+          "from": "Unnamed",
+          "to": "Unknown"
+        },
+        {
+          "from": "nan",
+          "to": "Unnamed"
+        },
+        {
+          "from": "Unnamed",
+          "to": "South Lhonak"
+        }
+      ]
+    },
+    {
+      "field": "Lake_type",
+      "n": 20,
+      "pct": 2.9,
+      "examples": [
+        {
+          "from": "Unknown",
+          "to": "Moraine dammed"
+        },
+        {
+          "from": "Unknown",
+          "to": "Moraine dammed"
+        },
+        {
+          "from": "Unknown",
+          "to": "Supraglacial"
+        },
+        {
+          "from": "Unknown",
+          "to": "Supraglacial"
+        }
+      ]
+    },
+    {
+      "field": "G_ID",
+      "n": 19,
+      "pct": 2.8,
+      "examples": [
+        {
+          "from": "nan",
+          "to": "G088849E27645N"
+        },
+        {
+          "from": "Not mapped",
+          "to": "G086961E27810N"
+        },
+        {
+          "from": "Not mapped",
+          "to": "G090627E28257N"
+        },
+        {
+          "from": "Not mapped",
+          "to": "G083822E29291N"
+        }
+      ]
+    },
+    {
+      "field": "Ref_scientific",
+      "n": 17,
+      "pct": 2.5,
+      "examples": [
+        {
+          "from": "(Zhang et al., 2021)",
+          "to": "(Zhang et al., 2021; Liu et al., 2019)"
+        },
+        {
+          "from": "(Allen et al., 2015)",
+          "to": "(Allen et al., 2016)"
+        },
+        {
+          "from": "(This study)",
+          "to": "(This study; Ashraf et al., 2015)"
+        },
+        {
+          "from": "(This study)",
+          "to": "(This study; Ashraf et al., 2015)"
+        }
+      ]
+    },
+    {
+      "field": "Ref_other",
+      "n": 16,
+      "pct": 2.3,
+      "examples": [
+        {
+          "from": "(Ashraf et al., 2015)",
+          "to": "nan"
+        },
+        {
+          "from": "(Ashraf et al., 2015)",
+          "to": "nan"
+        },
+        {
+          "from": "(Ashraf et al., 2015)",
+          "to": "nan"
+        },
+        {
+          "from": "(Ashraf et al., 2015)",
+          "to": "nan"
+        }
+      ]
+    },
+    {
+      "field": "Elev_lake",
+      "n": 7,
+      "pct": 1.0,
+      "examples": [
+        {
+          "from": "nan",
+          "to": "3840"
+        },
+        {
+          "from": "nan",
+          "to": "3020"
+        },
+        {
+          "from": "nan",
+          "to": "3020"
+        },
+        {
+          "from": "nan",
+          "to": "3020"
+        }
+      ]
+    },
+    {
+      "field": "Country",
+      "n": 5,
+      "pct": 0.7,
+      "examples": [
+        {
+          "from": "China",
+          "to": "Bhutan"
+        },
+        {
+          "from": "China",
+          "to": "Bhutan"
+        },
+        {
+          "from": "China",
+          "to": "India"
+        },
+        {
+          "from": "China",
+          "to": "India"
+        }
+      ]
+    },
+    {
+      "field": "LakeDB_ID",
+      "n": 3,
+      "pct": 0.4,
+      "examples": [
+        {
+          "from": "nan",
+          "to": "2,3,4"
+        },
+        {
+          "from": "3, 4",
+          "to": "3"
+        },
+        {
+          "from": "nan",
+          "to": "3,4"
+        }
+      ]
+    },
+    {
+      "field": "Repeat",
+      "n": 3,
+      "pct": 0.4,
+      "examples": [
+        {
+          "from": "N",
+          "to": "Y"
+        },
+        {
+          "from": "N",
+          "to": "Y"
+        },
+        {
+          "from": "Y",
+          "to": "N"
+        }
+      ]
+    },
+    {
+      "field": "Driver_GLOF",
+      "n": 3,
+      "pct": 0.4,
+      "examples": [
+        {
+          "from": "Unknown",
+          "to": "Ice avalanche"
+        },
+        {
+          "from": "Unknown",
+          "to": "Ice avalanche"
+        },
+        {
+          "from": "Unknown",
+          "to": "Ice avalanche, water level rise"
+        }
+      ]
+    },
+    {
+      "field": "GL_ID",
+      "n": 2,
+      "pct": 0.3,
+      "examples": [
+        {
+          "from": "Unknown",
+          "to": "GL088858E27655N"
+        },
+        {
+          "from": "Unknown",
+          "to": "GL096227E29742N"
+        }
+      ]
+    },
+    {
+      "field": "Transboundary",
+      "n": 2,
+      "pct": 0.3,
+      "examples": [
+        {
+          "from": "Y",
+          "to": "N"
+        },
+        {
+          "from": "N",
+          "to": "Y"
+        }
+      ]
+    },
+    {
+      "field": "Region_RGI",
+      "n": 2,
+      "pct": 0.3,
+      "examples": [
+        {
+          "from": "14_2",
+          "to": "14_1"
+        },
+        {
+          "from": "14_2",
+          "to": "14_1"
+        }
+      ]
+    },
+    {
+      "field": "Region_HiMAP",
+      "n": 2,
+      "pct": 0.3,
+      "examples": [
+        {
+          "from": "9",
+          "to": "8"
+        },
+        {
+          "from": "9",
+          "to": "8"
+        }
+      ]
+    },
+    {
+      "field": "Impact_type",
+      "n": 1,
+      "pct": 0.1,
+      "examples": [
+        {
+          "from": "Na",
+          "to": "nan"
+        }
+      ]
+    },
+    {
+      "field": "Mechanism",
+      "n": 1,
+      "pct": 0.1,
+      "examples": [
+        {
+          "from": "Unknown",
+          "to": "Moraine collapse"
+        }
+      ]
+    },
+    {
+      "field": "Lives_total",
+      "n": 1,
+      "pct": 0.1,
+      "examples": [
+        {
+          "from": "nan",
+          "to": "1980"
+        }
+      ]
+    },
+    {
+      "field": "Injured_total",
+      "n": 1,
+      "pct": 0.1,
+      "examples": [
+        {
+          "from": "nan",
+          "to": "2946"
+        }
+      ]
+    },
+    {
+      "field": "Residential_destroyed",
+      "n": 1,
+      "pct": 0.1,
+      "examples": [
+        {
+          "from": "nan",
+          "to": "1.6 million"
+        }
+      ]
+    },
+    {
+      "field": "Infra",
+      "n": 1,
+      "pct": 0.1,
+      "examples": [
+        {
+          "from": "nan",
+          "to": "Automatic water level station"
+        }
+      ]
+    },
+    {
+      "field": "Agricultural",
+      "n": 1,
+      "pct": 0.1,
+      "examples": [
+        {
+          "from": "nan",
+          "to": "Thousands of acres of agricultural lands were damaged"
+        }
+      ]
+    },
+    {
+      "field": "Ref_scientific_full",
+      "n": 1,
+      "pct": 0.1,
+      "examples": [
+        {
+          "from": "Zhang, T., Wang, W., Gao, T., An, B., 2021. Simulation and Assessment ",
+          "to": "Zhang, T., Wang, W., Gao, T., An, B., 2021. Simulation and Assessment "
+        }
+      ]
+    }
+  ],
+  "counts": [
+    {
+      "version": "v1.0",
+      "n": 697,
+      "date": "2022-12-30"
+    },
+    {
+      "version": "v2.0",
+      "n": 703,
+      "date": "2023-12-13"
+    },
+    {
+      "version": "v3.0",
+      "n": 736,
+      "date": "2024-12-13"
+    },
+    {
+      "version": "v4.0",
+      "n": 766,
+      "date": "2025-12-13"
+    }
+  ]
+}

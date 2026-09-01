@@ -1,0 +1,505 @@
+{
+  "issues": [
+    {
+      "check": "Whitespace contamination",
+      "severity": "medium",
+      "field": "17 fields",
+      "n_rows": 248,
+      "detail": "Non-breaking space (U+00A0) used as an empty-cell placeholder; read as a value by naive parsers, so those cells look populated when they are not.",
+      "action": "Converted to NA."
+    },
+    {
+      "check": "Leading whitespace",
+      "severity": "low",
+      "field": "LakeDB_ID, Lat_lake, Lon_lake, Mechanism, Infra, Ref_other",
+      "n_rows": 8,
+      "detail": "Values padded with leading spaces, which breaks exact-match joins and grouping.",
+      "action": "Trimmed."
+    },
+    {
+      "check": "Degree symbol in coordinate field",
+      "severity": "medium",
+      "field": "Lat_lake, Lon_lake",
+      "n_rows": 1,
+      "detail": "One record stores coordinates as ' 36.329250\u00b0' rather than a bare decimal, so it coerces to NaN and the event silently drops out of any map or spatial join.",
+      "action": "Stripped the symbol and parsed as float."
+    },
+    {
+      "check": "Coordinate plausibility",
+      "severity": "info",
+      "field": "Lat_lake, Lon_lake",
+      "n_rows": 0,
+      "detail": "Lake coordinates span 27.56\u201345.08\u00b0N, 69.44\u2013101.98\u00b0E. All fall inside High Mountain Asia.",
+      "action": "No change."
+    },
+    {
+      "check": "Year_exact vs Year_approx",
+      "severity": "info",
+      "field": "Year_exact, Year_approx",
+      "n_rows": 0,
+      "detail": "Both fields are populated for 582 records and never disagree. Year_approx is a superset that additionally carries text forms such as 'Before 1966', '2002-2004' and '1960s'.",
+      "action": "Derived year_best (Year_exact first) plus year_precision."
+    },
+    {
+      "check": "Non-numeric year strings",
+      "severity": "medium",
+      "field": "Year_approx",
+      "n_rows": 33,
+      "detail": "Ranges, decades and 'Before YYYY' forms in a field documented as INT. Any direct pd.to_numeric drops these events from time series.",
+      "action": "Parsed to a midpoint/bound in year_best with the assumption recorded in year_precision."
+    },
+    {
+      "check": "Undated events",
+      "severity": "high",
+      "field": "year_best",
+      "n_rows": 148,
+      "detail": "148 of 766 events (19%) carry no year at all. These are mostly satellite-detected events with no documentary account. Any per-decade rate must state this denominator.",
+      "action": "Retained with year_precision='unknown'; excluded from time series by default."
+    },
+    {
+      "check": "Free text in numeric fields",
+      "severity": "high",
+      "field": "Lives_total, Livestock, Residential_destroyed, Commerical_destroyed, Residential_damaged, Commerical_damaged, Agricultural, Hydropower",
+      "n_rows": 65,
+      "detail": "Fields documented as INT contain prose such as 'Damage in 8 villages', '1200 Teesta III, 510 Teesta V, 500 Teesta VI' and '13 houses fully damaged; 10 partially damaged'. Summing these fields naively either errors or silently drops them.",
+      "action": "Numeric part set to NA and the original string preserved in a parallel <field>_note column."
+    },
+    {
+      "check": "'+' as an at-least marker",
+      "severity": "medium",
+      "field": "Lives_total, Livestock, Residential_destroyed, others",
+      "n_rows": 55,
+      "detail": "'+' marks counts known only as a lower bound. The Data Description defines it, but it is inside the value rather than a separate field.",
+      "action": "Split into a boolean <field>_is_minimum column."
+    },
+    {
+      "check": "Placeholder naming drift",
+      "severity": "medium",
+      "field": "Lake_name",
+      "n_rows": 352,
+      "detail": "'Unnamed' and 'Unknown' are used interchangeably for nameless lakes and the split moved between releases (v3: 246 Unnamed / 106 Unknown; v4: 230 / 122). Name-based joins across versions break on this alone.",
+      "action": "Flagged in Lake_name_is_placeholder; not used as a join key."
+    },
+    {
+      "check": "Inconsistent multi-value delimiters",
+      "severity": "medium",
+      "field": "Driver_GLOF, Mechanism",
+      "n_rows": 16,
+      "detail": "Compound entries use both ';' and ',' as separators and vary in capitalisation ('Ice avalanche, water level rise' vs 'High temperatures; intense rainfall'), so 20 raw Driver_GLOF strings collapse to 15 distinct terms.",
+      "action": "Split on both delimiters into <field>_terms lists with normalised casing."
+    },
+    {
+      "check": "Trigger unknown for most events",
+      "severity": "info",
+      "field": "Driver_GLOF",
+      "n_rows": 669,
+      "detail": "87% of events have no identified trigger and 75% no identified breach mechanism. Driver frequencies are therefore proportions of a small documented subset, not of all GLOFs.",
+      "action": "No change; surfaced in the dashboard denominators."
+    },
+    {
+      "check": "Same lake, same date, two records",
+      "severity": "medium",
+      "field": "Lat_lake+Lon_lake+date",
+      "n_rows": 441,
+      "detail": "Two records share an identical lake coordinate and date. These appear to be a linked pair (Upper and Lower Ngole Cho, Nepal, 16 Aug 2024) that drained together and were given one shared coordinate rather than a true duplicate \u2014 but confirm against the source before treating them as two independent events.",
+      "action": "Retained and flagged, not merged."
+    },
+    {
+      "check": "Recurring events dominate the count",
+      "severity": "high",
+      "field": "Repeat",
+      "n_rows": 450,
+      "detail": "450 of 766 records (59%) are flagged as repeat events. The published abstract attributes 23% of all events to just three ephemeral ice-dammed lakes (Merzbacher, Khurdopin, Kyagar). Treating rows as independent events overstates the number of distinct hazard sites by roughly a factor of two.",
+      "action": "No change; the dashboard offers a one-record-per-lake view."
+    },
+    {
+      "check": "Fields with no data at all",
+      "severity": "medium",
+      "field": "Lives_disabilities, Injured_male, Injured_female, Injured_disabilities, Displaced_male, Displaced_female, Displaced_disabilities, Commerical_damaged",
+      "n_rows": 0,
+      "detail": "8 disaggregation fields are entirely empty across all 766 records. The schema promises sex- and disability-disaggregated casualties that were never populated.",
+      "action": "Retained for schema stability; excluded from analysis."
+    },
+    {
+      "check": "Fatality total reconciles to the published abstract",
+      "severity": "info",
+      "field": "Lives_total",
+      "n_rows": 28,
+      "detail": "Lives_total sums to 8,996 across 28 events with a recorded death toll, matching the 8,996 figure in the v4 metadata abstract. But only 28 of 766 records (4%) carry any casualty figure, and two events (6,000 and 1,980 deaths) supply 89% of the total.",
+      "action": "No change; the concentration is shown explicitly rather than averaged away."
+    },
+    {
+      "check": "GF_ID is not a stable identifier",
+      "severity": "high",
+      "field": "GF_ID",
+      "n_rows": 697,
+      "detail": "GF_ID is reassigned at every release: of the 697 IDs present in both v1.0 and v4.0, only 16% refer to a record with the same lake coordinate. GF_ID 415 is a different flood in each version. Any stored reference to a GF_ID silently points at the wrong event after an update.",
+      "action": "Version diff matches on lake coordinate plus date instead of on GF_ID."
+    }
+  ],
+  "transform_log": [
+    {
+      "action": "scrub",
+      "field": "all",
+      "n_rows": 248,
+      "detail": "non-breaking spaces replaced and blanks set to NA"
+    },
+    {
+      "action": "text_to_note",
+      "field": "Lives_total",
+      "n_rows": 4,
+      "detail": "free text moved to <field>_note, numeric set to NA"
+    },
+    {
+      "action": "text_to_note",
+      "field": "Livestock",
+      "n_rows": 5,
+      "detail": "free text moved to <field>_note, numeric set to NA"
+    },
+    {
+      "action": "text_to_note",
+      "field": "Residential_destroyed",
+      "n_rows": 29,
+      "detail": "free text moved to <field>_note, numeric set to NA"
+    },
+    {
+      "action": "text_to_note",
+      "field": "Commerical_destroyed",
+      "n_rows": 4,
+      "detail": "free text moved to <field>_note, numeric set to NA"
+    },
+    {
+      "action": "text_to_note",
+      "field": "Residential_damaged",
+      "n_rows": 1,
+      "detail": "free text moved to <field>_note, numeric set to NA"
+    },
+    {
+      "action": "text_to_note",
+      "field": "Commerical_damaged",
+      "n_rows": 2,
+      "detail": "free text moved to <field>_note, numeric set to NA"
+    },
+    {
+      "action": "text_to_note",
+      "field": "Agricultural",
+      "n_rows": 18,
+      "detail": "free text moved to <field>_note, numeric set to NA"
+    },
+    {
+      "action": "text_to_note",
+      "field": "Hydropower",
+      "n_rows": 2,
+      "detail": "free text moved to <field>_note, numeric set to NA"
+    },
+    {
+      "action": "placeholder_flag",
+      "field": "Lake_name",
+      "n_rows": 352,
+      "detail": "'Unnamed'/'Unknown' marked, original text kept"
+    },
+    {
+      "action": "placeholder_flag",
+      "field": "Glacier_name",
+      "n_rows": 277,
+      "detail": "'Unnamed'/'Unknown' marked, original text kept"
+    }
+  ],
+  "completeness": [
+    {
+      "field": "Lives_disabilities",
+      "filled": 0,
+      "pct": 0.0
+    },
+    {
+      "field": "Injured_male",
+      "filled": 0,
+      "pct": 0.0
+    },
+    {
+      "field": "Injured_female",
+      "filled": 0,
+      "pct": 0.0
+    },
+    {
+      "field": "Injured_disabilities",
+      "filled": 0,
+      "pct": 0.0
+    },
+    {
+      "field": "Displaced_male",
+      "filled": 0,
+      "pct": 0.0
+    },
+    {
+      "field": "Displaced_female",
+      "filled": 0,
+      "pct": 0.0
+    },
+    {
+      "field": "Displaced_disabilities",
+      "filled": 0,
+      "pct": 0.0
+    },
+    {
+      "field": "Commerical_damaged",
+      "filled": 0,
+      "pct": 0.0
+    },
+    {
+      "field": "Lives_male",
+      "filled": 1,
+      "pct": 0.1
+    },
+    {
+      "field": "Lives_female",
+      "filled": 2,
+      "pct": 0.3
+    },
+    {
+      "field": "Injured_total",
+      "filled": 3,
+      "pct": 0.4
+    },
+    {
+      "field": "Hydropower",
+      "filled": 4,
+      "pct": 0.5
+    },
+    {
+      "field": "Commerical_destroyed",
+      "filled": 6,
+      "pct": 0.8
+    },
+    {
+      "field": "Displaced_total",
+      "filled": 7,
+      "pct": 0.9
+    },
+    {
+      "field": "Sat_evidence",
+      "filled": 7,
+      "pct": 0.9
+    },
+    {
+      "field": "Livestock",
+      "filled": 8,
+      "pct": 1.0
+    },
+    {
+      "field": "Residential_damaged",
+      "filled": 15,
+      "pct": 2.0
+    },
+    {
+      "field": "Agricultural",
+      "filled": 15,
+      "pct": 2.0
+    },
+    {
+      "field": "Econ_damage",
+      "filled": 16,
+      "pct": 2.1
+    },
+    {
+      "field": "Discharge_solid",
+      "filled": 19,
+      "pct": 2.5
+    },
+    {
+      "field": "Residential_destroyed",
+      "filled": 24,
+      "pct": 3.1
+    },
+    {
+      "field": "Impact",
+      "filled": 27,
+      "pct": 3.5
+    },
+    {
+      "field": "Lives_total",
+      "filled": 28,
+      "pct": 3.7
+    },
+    {
+      "field": "Area",
+      "filled": 39,
+      "pct": 5.1
+    },
+    {
+      "field": "Discharge_water",
+      "filled": 77,
+      "pct": 10.1
+    },
+    {
+      "field": "Ref_other",
+      "filled": 88,
+      "pct": 11.5
+    },
+    {
+      "field": "Infra",
+      "filled": 93,
+      "pct": 12.1
+    },
+    {
+      "field": "Volume",
+      "filled": 107,
+      "pct": 14.0
+    },
+    {
+      "field": "Remarks",
+      "filled": 126,
+      "pct": 16.4
+    },
+    {
+      "field": "Day",
+      "filled": 325,
+      "pct": 42.4
+    },
+    {
+      "field": "Month",
+      "filled": 390,
+      "pct": 50.9
+    },
+    {
+      "field": "LakeDB_ID",
+      "filled": 395,
+      "pct": 51.6
+    },
+    {
+      "field": "Lat_impact",
+      "filled": 481,
+      "pct": 62.8
+    },
+    {
+      "field": "Lon_impact",
+      "filled": 481,
+      "pct": 62.8
+    },
+    {
+      "field": "Elev_impact",
+      "filled": 481,
+      "pct": 62.8
+    },
+    {
+      "field": "Impact_type",
+      "filled": 501,
+      "pct": 65.4
+    },
+    {
+      "field": "Year_exact",
+      "filled": 585,
+      "pct": 76.4
+    },
+    {
+      "field": "Year_approx",
+      "filled": 618,
+      "pct": 80.7
+    },
+    {
+      "field": "Ref_scientific_full",
+      "filled": 687,
+      "pct": 89.7
+    },
+    {
+      "field": "Ref_scientific",
+      "filled": 759,
+      "pct": 99.1
+    },
+    {
+      "field": "GL_ID",
+      "filled": 763,
+      "pct": 99.6
+    },
+    {
+      "field": "G_ID",
+      "filled": 765,
+      "pct": 99.9
+    },
+    {
+      "field": "GF_ID",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Lake_name",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Glacier_name",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Lat_lake",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Lon_lake",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Elev_lake",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Lake_type",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Transboundary",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Repeat",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Region_RGI",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Region_HiMAP",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Country",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Province",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "River_Basin",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Driver_lake",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Driver_GLOF",
+      "filled": 766,
+      "pct": 100.0
+    },
+    {
+      "field": "Mechanism",
+      "filled": 766,
+      "pct": 100.0
+    }
+  ]
+}

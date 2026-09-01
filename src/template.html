@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HMAGLOFDB v4.0 — outburst flood record for High Mountain Asia</title>
+<style>
+:root{
+  --ground:#E6E9E4; --paper:#F8F9F7; --line:#CBD2CC; --hair:#DDE2DC;
+  --ink:#151E1D; --body:#33403E; --muted:#69766F;
+  --melt:#2E7A82; --melt-d:#1D5A61; --ice:#9FC1C4;
+  --silt:#AE7638; --flood:#A2372B; --moss:#5F7A4A;
+  --hi:#F0F2EE;
+  --r:3px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--ground); color:var(--body);
+  font:400 15px/1.55 "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing:-0.003em;
+}
+.num{font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-variant-numeric:tabular-nums; letter-spacing:-0.02em}
+
+/* ---------- masthead ---------- */
+.mast{background:var(--ink); color:#E8EDEA; padding:26px 22px 0}
+.mast-in{max-width:1180px; margin:0 auto}
+.mast h1{
+  margin:0; font-size:clamp(27px,4.4vw,46px); line-height:1.02;
+  font-weight:700; letter-spacing:-0.032em; color:#fff; max-width:20ch;
+}
+.mast p{margin:11px 0 0; color:#9FB0AC; max-width:66ch; font-size:14.5px}
+.mast a{color:var(--ice)}
+.chain{display:flex; gap:0; margin:22px 0 0; flex-wrap:wrap; align-items:flex-end}
+.link{padding:7px 15px 9px; border-bottom:2px solid #3A4746; min-width:86px}
+.link.now{border-bottom-color:var(--ice); background:#1E2A28}
+.link b{display:block; font-size:20px; color:#fff; font-weight:600}
+.link span{font-size:11.5px; color:#8C9C98}
+.link.now span{color:var(--ice)}
+
+/* ---------- tabs ---------- */
+nav{background:var(--ink); padding:18px 22px 0; position:sticky; top:0; z-index:40}
+.nav-in{max-width:1180px; margin:0 auto; display:flex; gap:2px; overflow-x:auto}
+nav button{
+  font:inherit; font-size:14px; font-weight:500; cursor:pointer; white-space:nowrap;
+  background:#212D2B; color:#9FB0AC; border:0; border-radius:var(--r) var(--r) 0 0;
+  padding:10px 17px 11px;
+}
+nav button:hover{color:#DCE6E3; background:#2A3735}
+nav button[aria-selected=true]{background:var(--ground); color:var(--ink); font-weight:600}
+nav button:focus-visible{outline:2px solid var(--ice); outline-offset:-2px}
+
+main{max-width:1180px; margin:0 auto; padding:24px 22px 70px}
+section[hidden]{display:none}
+h2{font-size:21px; font-weight:650; color:var(--ink); letter-spacing:-0.018em; margin:0 0 4px}
+h3{font-size:15.5px; font-weight:650; color:var(--ink); margin:0 0 8px; letter-spacing:-0.01em}
+.lede{margin:0 0 20px; max-width:72ch; color:var(--muted); font-size:14.5px}
+.panel{background:var(--paper); border:1px solid var(--hair); border-radius:var(--r); padding:18px}
+.panel + .panel{margin-top:16px}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+@media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+
+/* ---------- map ---------- */
+.mapwrap{background:var(--paper); border:1px solid var(--hair); border-radius:var(--r); padding:10px; position:relative}
+svg{display:block; width:100%; height:auto; overflow:visible}
+.grat{stroke:var(--line); stroke-width:.5; fill:none}
+.gratlab{fill:#9AA69F; font-size:9px}
+.cname{fill:#8D9A93; font-size:11px; font-weight:600; letter-spacing:.02em; pointer-events:none}
+.pt{stroke:var(--paper); stroke-width:.6; cursor:pointer}
+.pt:hover{stroke:var(--ink); stroke-width:1.2}
+#tip{
+  position:absolute; pointer-events:none; opacity:0; transition:opacity .1s;
+  background:var(--ink); color:#EAF0ED; padding:9px 11px; border-radius:var(--r);
+  font-size:12.5px; line-height:1.45; max-width:250px; z-index:20;
+}
+#tip b{color:#fff; font-size:13px}
+#tip i{color:#9FB0AC; font-style:normal}
+
+/* ---------- controls ---------- */
+.ctl{display:flex; gap:16px; flex-wrap:wrap; align-items:flex-end; margin-bottom:14px}
+.fld{display:flex; flex-direction:column; gap:4px}
+.fld label{font-size:12px; color:var(--muted); font-weight:500}
+select, input[type=range]{font:inherit; font-size:13.5px; accent-color:var(--melt)}
+select{padding:6px 8px; border:1px solid var(--line); border-radius:var(--r); background:var(--paper); color:var(--ink)}
+input[type=range]{width:190px}
+.chk{display:flex; align-items:center; gap:6px; font-size:13.5px; color:var(--body); cursor:pointer; padding-bottom:6px}
+.chk input{accent-color:var(--melt); width:15px; height:15px}
+button.ghost{
+  font:inherit; font-size:13px; padding:6px 12px; cursor:pointer; color:var(--melt-d);
+  background:transparent; border:1px solid var(--line); border-radius:var(--r);
+}
+button.ghost:hover{background:var(--hi); border-color:var(--melt)}
+
+/* ---------- legend + stats ---------- */
+.legend{display:flex; gap:14px; flex-wrap:wrap; font-size:12.5px; color:var(--muted); margin-top:10px}
+.legend i{width:9px; height:9px; border-radius:50%; display:inline-block; margin-right:5px; vertical-align:-1px}
+.stats{display:flex; flex-wrap:wrap; gap:0; border-top:1px solid var(--hair); margin-top:18px}
+.stat{padding:13px 22px 13px 0; margin-right:22px; border-right:1px solid var(--hair); flex:0 0 auto}
+.stat:last-child{border-right:0}
+.stat b{display:block; font-size:23px; color:var(--ink); font-weight:650; letter-spacing:-0.02em}
+.stat span{font-size:12.5px; color:var(--muted)}
+
+/* ---------- tables ---------- */
+table{border-collapse:collapse; width:100%; font-size:13.5px}
+th{
+  text-align:left; font-weight:600; color:var(--muted); font-size:12px;
+  padding:6px 9px 6px 0; border-bottom:1px solid var(--line); white-space:nowrap;
+}
+td{padding:7px 9px 7px 0; border-bottom:1px solid var(--hair); vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.n, th.n{text-align:right; padding-right:14px}
+.scroll{max-height:430px; overflow:auto}
+.scroll table{margin:0}
+.scroll thead th{position:sticky; top:0; background:var(--paper); z-index:2}
+
+/* ---------- severity + tags ---------- */
+.sev{
+  display:inline-block; font-size:11px; font-weight:600; padding:2px 7px 3px;
+  border-radius:var(--r); white-space:nowrap;
+}
+.sev.high{background:#F3DCD8; color:#7E2B21}
+.sev.medium{background:#F2E4CF; color:#7B5320}
+.sev.low{background:#E1E9DC; color:#4B6339}
+.sev.info{background:#DCE8E9; color:#215C63}
+.tag{font-size:11.5px; color:var(--muted); background:var(--hi); border:1px solid var(--hair);
+  padding:1px 6px 2px; border-radius:var(--r); white-space:nowrap}
+.fix{color:var(--melt-d)}
+.caption{font-size:12.5px; color:var(--muted); margin:10px 0 0; max-width:74ch}
+.bar{height:9px; background:var(--hi); border-radius:1px; position:relative; overflow:hidden}
+.bar i{display:block; height:100%; background:var(--melt)}
+.bar i.lowfill{background:var(--silt)}
+.bar i.zero{background:var(--flood)}
+details{margin-top:12px}
+summary{cursor:pointer; font-size:13.5px; color:var(--melt-d); font-weight:500}
+summary:hover{text-decoration:underline}
+.note{border-left:2px solid var(--silt); padding:2px 0 2px 12px; margin:14px 0 0;
+  font-size:13.5px; color:var(--body); max-width:74ch}
+footer{border-top:1px solid var(--line); margin-top:34px; padding-top:16px; font-size:12.5px; color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="mast-in">
+    <h1>Every recorded outburst flood in High Mountain Asia</h1>
+    <p>766 glacial lake outburst floods, 1533 to 2025, from the ICIMOD HMAGLOFDB. This view
+       cleans the release, checks what it can and cannot support, and tracks what changed
+       across four annual updates.</p>
+    <div class="chain" id="chain"></div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-in" role="tablist">
+    <button role="tab" data-t="map" aria-selected="true">Where</button>
+    <button role="tab" data-t="when" aria-selected="false">When</button>
+    <button role="tab" data-t="impact" aria-selected="false">Impact</button>
+    <button role="tab" data-t="qc" aria-selected="false">Data quality</button>
+    <button role="tab" data-t="ver" aria-selected="false">What changed</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============================ MAP ============================ -->
+<section id="map">
+  <div class="ctl">
+    <div class="fld"><label for="fc">Country</label><select id="fc"></select></div>
+    <div class="fld"><label for="ft">Lake type</label><select id="ft"></select></div>
+    <div class="fld"><label for="fy">From <span class="num" id="fyv">1533</span></label>
+      <input type="range" id="fy" min="1533" max="2025" value="1533"></div>
+    <label class="chk"><input type="checkbox" id="ffatal"> Deadly floods only</label>
+    <label class="chk"><input type="checkbox" id="fsite"> One marker per lake</label>
+    <button class="ghost" id="reset">Show all</button>
+  </div>
+
+  <div class="mapwrap">
+    <svg id="mapsvg" viewBox="0 0 900 500" role="img" aria-label="Map of outburst flood source lakes"></svg>
+    <div id="tip"></div>
+  </div>
+  <div class="legend" id="legend"></div>
+  <p class="caption" id="mapcap"></p>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="panel">
+      <h3>Lakes that flooded more than once</h3>
+      <div class="scroll"><table id="sites"></table></div>
+      <p class="caption">Three ice-dammed lakes account for a fifth of the whole database.
+        They fill and drain almost every summer, so each row of the file is a drainage
+        cycle, not a distinct hazard site.</p>
+    </div>
+    <div class="panel">
+      <h3>Where the floods start</h3>
+      <div id="cbars"></div>
+      <p class="caption">Counts follow the record, not the risk. Kyrgyzstan and Kazakhstan
+        rank high partly because Soviet-era field observers logged small annual drainages
+        that go unrecorded elsewhere.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ WHEN ============================ -->
+<section id="when" hidden>
+  <h2>Timing</h2>
+  <p class="lede">618 of 766 events carry a usable year. The other 148 are satellite
+     detections with no documentary date and are left out of every chart on this page.</p>
+
+  <div class="panel">
+    <h3>Events per decade since 1900</h3>
+    <svg id="dec" viewBox="0 0 900 300"></svg>
+    <div class="legend" id="declegend"></div>
+    <p class="caption">The rise after 1950 tracks observation capacity as much as hazard.
+      Satellite coverage from the 1970s, then high-cadence imagery after 2000, made small
+      and remote events visible for the first time. The database cannot separate a real
+      increase in flood frequency from an increase in detection, and it does not claim to.</p>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="panel">
+      <h3>Month of occurrence</h3>
+      <svg id="mon" viewBox="0 0 440 230"></svg>
+      <p class="caption">Of the 390 events with a known month, most fall in the summer
+        melt and monsoon window.</p>
+    </div>
+    <div class="panel">
+      <h3>How precisely each event is dated</h3>
+      <div id="prec"></div>
+      <p class="caption">Year_approx carries text forms such as "Before 1966", "2002-2004"
+        and "1960s". The cleaned file resolves each to a single year and records the
+        assumption alongside it, so approximate dates never masquerade as exact ones.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ IMPACT ============================ -->
+<section id="impact" hidden>
+  <h2>Consequences</h2>
+  <p class="lede">The database records 8,996 deaths. Two events supply 89% of that figure,
+     and 96% of records carry no casualty entry at all — absent, not zero.</p>
+
+  <div class="panel">
+    <h3>Deaths by event</h3>
+    <svg id="fat" viewBox="0 0 900 260"></svg>
+    <p class="caption">A log scale, because the range runs from 1 to 6,000. Kedarnath (2013)
+      and the Booni Gol water-pocket burst (2010) dominate any regional total that includes them.</p>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="panel">
+      <h3>Every event with a recorded death toll</h3>
+      <div class="scroll"><table id="fattab"></table></div>
+    </div>
+    <div>
+      <div class="panel">
+        <h3>What triggered the flood</h3>
+        <div id="drv"></div>
+        <p class="caption">Counts are out of the 97 events with an identified trigger, not
+          out of 766. The remaining 87% are recorded as unknown.</p>
+      </div>
+      <div class="panel">
+        <h3>How the dam failed</h3>
+        <div id="mech"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">Casualty totals in this database are lower bounds. Several entries carry
+    a "+" meaning at least that many; the cleaned file moves that marker into its own column
+    so it survives any aggregation.</div>
+</section>
+
+<!-- ============================ QC ============================ -->
+<section id="qc" hidden>
+  <h2>What to check before you analyse this</h2>
+  <p class="lede">Seventeen findings from the cleaning run, ordered by how badly each one
+     could distort a result. Nothing was deleted: every repair is reversible and every
+     original string is preserved.</p>
+
+  <div class="panel"><div id="qclist"></div></div>
+
+  <div class="panel">
+    <h3>How much of each field is actually filled</h3>
+    <div id="comp"></div>
+  </div>
+
+  <details>
+    <summary>Transformation log — every change made to the file</summary>
+    <div class="panel" style="margin-top:10px"><div class="scroll"><table id="tlog"></table></div></div>
+  </details>
+</section>
+
+<!-- ============================ VERSIONS ============================ -->
+<section id="ver" hidden>
+  <h2>Four releases, 2022 to 2025</h2>
+  <p class="lede">The record grew by 69 events. Matching on GF_ID would give a wrong answer,
+     so these comparisons match on lake coordinate plus date instead.</p>
+
+  <div class="panel">
+    <h3>Growth of the record</h3>
+    <svg id="growth" viewBox="0 0 900 250"></svg>
+  </div>
+
+  <div class="panel">
+    <h3>Release by release</h3>
+    <div id="steps"></div>
+  </div>
+
+  <div class="panel">
+    <h3>Edits to events that were already in v1.0</h3>
+    <p class="caption" style="margin:0 0 12px">602 events appear in both v1.0 and v4.0. These
+      fields changed underneath them.</p>
+    <table id="edits"></table>
+  </div>
+
+  <div class="panel">
+    <h3>Records in an old release with no exact match in the next one</h3>
+    <div class="scroll"><table id="gone"></table></div>
+    <p class="caption">Nine of the ten resolve to the same lake with a corrected date, a
+      corrected coordinate or a new name. Only one — Bhairav Taal, Nepal, dated 5 July 2024
+      in v3.0 — has no record within 2 km in v4.0. Verify that one against the source before
+      concluding it was withdrawn.</p>
+  </div>
+</section>
+
+<footer>
+  Source: HMAGLOFDB v4.0, ICIMOD, released 13 December 2025 (CC BY 4.0),
+  <a href="https://doi.org/10.26066/RDS.1973283">doi.org/10.26066/RDS.1973283</a>.
+  Cleaning, quality checks and version comparison are derived here and are not part of the
+  published dataset; the underlying values are unchanged.
+</footer>
+</main>
+
+<script>
+const D = /*__DATA__*/;
+
+/* ---------- palette ---------- */
+const TYPEC = {
+  "Moraine dammed":"#2E7A82", "Ice dammed":"#7FA9C9", "Supraglacial":"#5F7A4A",
+  "Water pocket":"#AE7638", "Bedrock":"#8A8F86", "Landslide dammed":"#A2372B",
+  "Thermokarst":"#B5527E", "Unknown":"#B9C2BC"
+};
+const fmt = n => (n==null||isNaN(n)) ? "—" : Number(n).toLocaleString("en-GB");
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const el = (t,a,h)=>{const n=document.createElementNS("http://www.w3.org/2000/svg",t);
+  for(const k in a) n.setAttribute(k,a[k]); if(h!=null) n.textContent=h; return n;};
+
+/* ---------- masthead chain ---------- */
+document.getElementById("chain").innerHTML = D.diff.counts.map((c,i)=>
+  `<div class="link${i===D.diff.counts.length-1?" now":""}">
+     <b class="num">${c.n}</b><span>${c.version} · ${c.date.slice(0,4)}</span></div>`).join("");
+
+/* ---------- tabs ---------- */
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected", x===b));
+  document.querySelectorAll("main > section").forEach(s=>s.hidden = s.id!==b.dataset.t);
+  window.scrollTo({top:0});
+});
+
+/* ======================= MAP ======================= */
+const P = D.points, W=900, PAD=42;
+const la = P.map(p=>p.lat), lo = P.map(p=>p.lon);
+const LA=[Math.min(...la)-.7, Math.max(...la)+.7], LO=[Math.min(...lo)-.7, Math.max(...lo)+.7];
+// equirectangular, scaled so one degree of longitude covers cos(lat) of one degree of latitude
+const KLAT = Math.cos((LA[0]+LA[1])/2 * Math.PI/180);
+const PXLON = (W-2*PAD)/(LO[1]-LO[0]);
+const PXLAT = PXLON/KLAT;
+const H = Math.round((LA[1]-LA[0])*PXLAT) + 2*PAD;
+const sx = v => PAD + (v-LO[0])*PXLON;
+const sy = v => PAD + (LA[1]-v)*PXLAT;
+const rad = p => p.deaths>0 ? 4.2+Math.sqrt(p.deaths)/9 : 3.1;
+
+const fc=document.getElementById("fc"), ft=document.getElementById("ft"),
+      fy=document.getElementById("fy"), tip=document.getElementById("tip");
+fc.innerHTML = `<option value="">All countries</option>` +
+  D.by_country.map(c=>`<option>${c.k}</option>`).join("");
+ft.innerHTML = `<option value="">All lake types</option>` +
+  D.by_type.map(c=>`<option>${c.k}</option>`).join("");
+
+function filtered(){
+  const c=fc.value, t=ft.value, y=+fy.value,
+        fatal=document.getElementById("ffatal").checked;
+  let out = P.filter(p =>
+    (!c||p.country===c) && (!t||p.type===t) &&
+    (!fatal || p.deaths>0) &&
+    (y<=1533 || (p.year!=null && p.year>=y)));
+  if(document.getElementById("fsite").checked){
+    const seen=new Set();
+    out = out.filter(p=>{const k=p.lat.toFixed(3)+","+p.lon.toFixed(3);
+      if(seen.has(k))return false; seen.add(k); return true;});
+  }
+  return out;
+}
+
+function drawMap(){
+  const svg=document.getElementById("mapsvg"); svg.textContent="";
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const g=el("g");
+  for(let v=Math.ceil(LO[0]/5)*5; v<=LO[1]; v+=5){
+    g.appendChild(el("line",{x1:sx(v),x2:sx(v),y1:PAD-8,y2:H-PAD+8,class:"grat"}));
+    g.appendChild(el("text",{x:sx(v),y:H-PAD+22,class:"gratlab","text-anchor":"middle"},v+"°E"));
+  }
+  for(let v=Math.ceil(LA[0]/5)*5; v<=LA[1]; v+=5){
+    g.appendChild(el("line",{y1:sy(v),y2:sy(v),x1:PAD-8,x2:W-PAD+8,class:"grat"}));
+    g.appendChild(el("text",{x:PAD-13,y:sy(v)+3,class:"gratlab","text-anchor":"end"},v+"°N"));
+  }
+  svg.appendChild(g);
+
+  // country labels placed at the centroid of that country's own points
+  const cg=el("g"), by={};
+  P.forEach(p=>{(by[p.country]=by[p.country]||[]).push(p)});
+  Object.entries(by).forEach(([c,ps])=>{
+    const mx=ps.reduce((s,p)=>s+p.lon,0)/ps.length, my=ps.reduce((s,p)=>s+p.lat,0)/ps.length;
+    cg.appendChild(el("text",{x:sx(mx),y:sy(my)-13,class:"cname","text-anchor":"middle"},c));
+  });
+  svg.appendChild(cg);
+
+  const pts=filtered().slice().sort((a,b)=>(b.deaths||0)-(a.deaths||0));
+  const pg=el("g");
+  pts.forEach(p=>{
+    const c=el("circle",{cx:sx(p.lon).toFixed(1), cy:sy(p.lat).toFixed(1), r:rad(p).toFixed(2),
+      fill:TYPEC[p.type]||"#999", "fill-opacity":p.deaths>0?0.92:0.62, class:"pt"});
+    c.addEventListener("mouseenter",e=>{
+      const yr = p.year==null ? "date unknown"
+        : (p.prec==="exact" ? p.year : p.year+" ("+p.prec+")");
+      tip.innerHTML = `<b>${esc(p.lake)}</b><br><i>${esc(p.glacier)} glacier · ${esc(p.country)}</i><br>
+        ${esc(p.type)} · ${yr}${p.basin?"<br><i>"+esc(p.basin)+" basin</i>":""}
+        ${p.deaths>0?'<br><span style="color:#E7A79C">'+fmt(p.deaths)+' deaths</span>':""}`;
+      const r=e.target.getBoundingClientRect(), m=svg.parentElement.getBoundingClientRect();
+      tip.style.left=Math.min(r.left-m.left+12, m.width-262)+"px";
+      tip.style.top=(r.top-m.top-10)+"px"; tip.style.opacity=1;
+    });
+    c.addEventListener("mouseleave",()=>tip.style.opacity=0);
+    pg.appendChild(c);
+  });
+  svg.appendChild(pg);
+
+  const nSites=new Set(pts.map(p=>p.lat.toFixed(3)+","+p.lon.toFixed(3))).size;
+  document.getElementById("mapcap").textContent =
+    `Showing ${pts.length} of ${P.length} records at ${nSites} distinct lakes. `+
+    `Marker size scales with recorded deaths; a small marker means no casualty figure was `+
+    `recorded, not that nobody was hurt. Repeat floods sit exactly on top of each other — `+
+    `switch to one marker per lake to see how few sites these ${pts.length} records cover.`;
+}
+
+document.getElementById("legend").innerHTML = D.by_type.map(t=>
+  `<span><i style="background:${TYPEC[t.k]}"></i>${t.k} <span class="num">${t.n}</span></span>`).join("");
+
+[fc,ft].forEach(x=>x.onchange=drawMap);
+fy.oninput=()=>{document.getElementById("fyv").textContent=fy.value; drawMap();};
+document.getElementById("ffatal").onchange=drawMap;
+document.getElementById("fsite").onchange=drawMap;
+document.getElementById("reset").onclick=()=>{
+  fc.value=""; ft.value=""; fy.value=1533; document.getElementById("fyv").textContent="1533";
+  document.getElementById("ffatal").checked=false;
+  document.getElementById("fsite").checked=false; drawMap();
+};
+drawMap();
+
+/* ---------- stats strip ---------- */
+const M=D.meta;
+document.getElementById("stats").innerHTML = [
+  [fmt(M.n_events),"flood records"],
+  [fmt(M.n_sites),"distinct lakes"],
+  [fmt(M.deaths),"deaths recorded"],
+  [M.n_fatal+" of "+M.n_events,"events with a death toll"],
+  [Math.round(100*M.recurring/M.n_events)+"%","flagged as repeat events"],
+  [Math.round(100*M.transboundary/M.n_events)+"%","cross a national border"]
+].map(([b,s])=>`<div class="stat"><b class="num">${b}</b><span>${s}</span></div>`).join("");
+
+/* ---------- repeat-flood sites ---------- */
+document.getElementById("sites").innerHTML =
+  `<thead><tr><th>Lake</th><th>Glacier</th><th>Country</th><th>Type</th><th class="n">Floods</th></tr></thead><tbody>`+
+  D.top_sites.map(s=>`<tr><td>${esc(s.lake)}</td><td>${esc(s.glacier)}</td>
+    <td>${esc(s.country)}</td><td><span class="tag">${esc(s.type)}</span></td>
+    <td class="n num">${s.n}</td></tr>`).join("")+`</tbody>`;
+
+/* ---------- horizontal bar helper ---------- */
+function bars(id, rows, colorFn){
+  const max=Math.max(...rows.map(r=>r.n));
+  document.getElementById(id).innerHTML = rows.map(r=>`
+    <div style="display:grid;grid-template-columns:132px 1fr 46px;gap:10px;align-items:center;margin:5px 0">
+      <span style="font-size:13px">${esc(r.k)}</span>
+      <span class="bar"><i style="width:${(100*r.n/max).toFixed(1)}%;background:${colorFn?colorFn(r):"var(--melt)"}"></i></span>
+      <span class="num" style="font-size:12.5px;text-align:right;color:var(--muted)">${fmt(r.n)}</span>
+    </div>`).join("");
+}
+bars("cbars", D.by_country);
+bars("drv", D.by_driver);
+bars("mech", D.by_mechanism.slice(0,8));
+bars("prec", D.precision_mix.map(p=>({k:{exact:"Exact year",unknown:"No date at all",
+  range:"A range of years",before:"Before a given year",decade:"A decade only",
+  "within-year span":"A span of months"}[p.k]||p.k, n:p.n})),
+  r=>r.k==="No date at all"?"var(--flood)":r.k==="Exact year"?"var(--melt)":"var(--silt)");
+
+/* ======================= WHEN ======================= */
+(function(){
+  const svg=document.getElementById("dec"), W=900,H=300,L=48,B=44,T=14,R=14;
+  const decs=[]; for(let d=1900;d<=2020;d+=10) decs.push(d);
+  const series=D.by_decade_type, order=["Ice dammed","Moraine dammed","Supraglacial"];
+  const tot=decs.map((d,i)=>order.reduce((s,k)=>s+(series[k]?series[k][i]:0),0));
+  const other=decs.map((d,i)=>{
+    const rec=D.by_decade.find(r=>r.decade===d); return (rec?rec.n:0)-tot[i];});
+  const max=Math.max(...decs.map((d,i)=>tot[i]+other[i]));
+  const bw=(W-L-R)/decs.length*0.66, step=(W-L-R)/decs.length;
+  const y=v=>H-B-(v/max)*(H-B-T);
+  [0,0.25,0.5,0.75,1].forEach(f=>{
+    const v=Math.round(max*f);
+    svg.appendChild(el("line",{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:"var(--hair)","stroke-width":1}));
+    svg.appendChild(el("text",{x:L-9,y:y(v)+4,"text-anchor":"end",fill:"#9AA69F","font-size":11},v));
+  });
+  decs.forEach((d,i)=>{
+    let acc=0; const x=L+i*step+(step-bw)/2;
+    [...order.map(k=>[k,series[k]?series[k][i]:0]),["Other / unknown",other[i]]].forEach(([k,v])=>{
+      if(v<=0) return;
+      svg.appendChild(el("rect",{x, y:y(acc+v), width:bw, height:y(acc)-y(acc+v),
+        fill:k==="Other / unknown"?"#B9C2BC":TYPEC[k]}));
+      acc+=v;
+    });
+    svg.appendChild(el("text",{x:L+i*step+step/2, y:H-B+18,"text-anchor":"middle",
+      fill:"#69766F","font-size":11}, d+"s"));
+  });
+  svg.appendChild(el("line",{x1:L,x2:W-R,y1:H-B,y2:H-B,stroke:"var(--line)"}));
+  document.getElementById("declegend").innerHTML =
+    [...order,"Other / unknown"].map(k=>
+    `<span><i style="background:${k==="Other / unknown"?"#B9C2BC":TYPEC[k]}"></i>${k}</span>`).join("");
+})();
+
+(function(){
+  const svg=document.getElementById("mon"), W=440,H=230,L=34,B=34,T=12,R=10;
+  const m=D.by_month, max=Math.max(...m.map(r=>r.n));
+  const step=(W-L-R)/12, bw=step*0.6, y=v=>H-B-(v/max)*(H-B-T);
+  const names=["J","F","M","A","M","J","J","A","S","O","N","D"];
+  m.forEach((r,i)=>{
+    const x=L+i*step+(step-bw)/2;
+    svg.appendChild(el("rect",{x,y:y(r.n),width:bw,height:H-B-y(r.n),
+      fill:(i>=5&&i<=8)?"var(--melt)":"var(--ice)"}));
+    if(r.n) svg.appendChild(el("text",{x:x+bw/2,y:y(r.n)-5,"text-anchor":"middle",
+      fill:"#69766F","font-size":10},r.n));
+    svg.appendChild(el("text",{x:x+bw/2,y:H-B+16,"text-anchor":"middle",
+      fill:"#9AA69F","font-size":11},names[i]));
+  });
+  svg.appendChild(el("line",{x1:L,x2:W-R,y1:H-B,y2:H-B,stroke:"var(--line)"}));
+})();
+
+/* ======================= IMPACT ======================= */
+(function(){
+  const svg=document.getElementById("fat"), W=900,H=260,L=52,B=52,T=16,R=16;
+  const ev=D.fatal_events, max=Math.log10(10000);
+  const step=(W-L-R)/ev.length, bw=Math.min(step*0.62,26);
+  const y=v=>H-B-(Math.log10(Math.max(v,1))/max)*(H-B-T);
+  [1,10,100,1000,10000].forEach(v=>{
+    svg.appendChild(el("line",{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:"var(--hair)"}));
+    svg.appendChild(el("text",{x:L-9,y:y(v)+4,"text-anchor":"end",fill:"#9AA69F","font-size":11},fmt(v)));
+  });
+  ev.forEach((e,i)=>{
+    const x=L+i*step+(step-bw)/2;
+    svg.appendChild(el("rect",{x,y:y(e.deaths),width:bw,height:H-B-y(e.deaths),
+      fill:e.deaths>=200?"var(--flood)":"#C98274"}));
+    const lab=el("text",{x:x+bw/2+4,y:H-B+9,fill:"#69766F","font-size":10.5,
+      transform:`rotate(38 ${x+bw/2+4} ${H-B+9})`},
+      (e.lake==="Unknown"||e.lake==="Unnamed"?e.glacier:e.lake)+(e.year?" "+e.year:""));
+    svg.appendChild(lab);
+  });
+  svg.appendChild(el("line",{x1:L,x2:W-R,y1:H-B,y2:H-B,stroke:"var(--line)"}));
+})();
+
+document.getElementById("fattab").innerHTML =
+  `<thead><tr><th>Lake</th><th>Country</th><th>Year</th><th>Lake type</th><th class="n">Deaths</th></tr></thead><tbody>`+
+  D.fatal_events.map(e=>`<tr>
+    <td>${esc(e.lake==="Unknown"||e.lake==="Unnamed"?e.glacier+" (glacier)":e.lake)}</td>
+    <td>${esc(e.country)}</td>
+    <td class="num">${e.year?Math.round(e.year):"—"}${e.prec&&e.prec!=="exact"?' <span class="tag">'+e.prec+'</span>':""}</td>
+    <td><span class="tag">${esc(e.type)}</span></td>
+    <td class="n num">${fmt(e.deaths)}${e.atleast?"+":""}</td></tr>`).join("")+`</tbody>`;
+
+/* ======================= QC ======================= */
+const sevRank={high:0,medium:1,low:2,info:3};
+document.getElementById("qclist").innerHTML = D.qc
+  .slice().sort((a,b)=>sevRank[a.severity]-sevRank[b.severity])
+  .map(q=>`
+  <div style="padding:14px 0;border-bottom:1px solid var(--hair)">
+    <div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
+      <span class="sev ${q.severity}">${q.severity}</span>
+      <h3 style="margin:0;flex:1 1 240px">${esc(q.check)}</h3>
+      <span class="num" style="color:var(--muted);font-size:12.5px">${fmt(q.n_rows)} rows</span>
+    </div>
+    <p style="margin:7px 0 0;max-width:82ch;font-size:13.8px">${esc(q.detail)}</p>
+    <p style="margin:5px 0 0;font-size:13px" class="fix">Handling — ${esc(q.action)}</p>
+    <p style="margin:4px 0 0;font-size:12px;color:var(--muted)">${esc(q.field)}</p>
+  </div>`).join("");
+
+(function(){
+  const rows=D.completeness.filter(r=>r.pct<100);
+  document.getElementById("comp").innerHTML = rows.map(r=>`
+    <div style="display:grid;grid-template-columns:180px 1fr 62px;gap:10px;align-items:center;margin:4px 0">
+      <span style="font-size:12.5px;font-family:inherit">${esc(r.field)}</span>
+      <span class="bar"><i class="${r.pct===0?"zero":r.pct<25?"lowfill":""}" style="width:${r.pct}%"></i></span>
+      <span class="num" style="font-size:12px;text-align:right;color:var(--muted)">${r.pct}%</span>
+    </div>`).join("");
+})();
+
+document.getElementById("tlog").innerHTML =
+  `<thead><tr><th>Action</th><th>Field</th><th class="n">Rows</th><th>Detail</th></tr></thead><tbody>`+
+  D.transform_log.map(t=>`<tr><td><span class="tag">${esc(t.action)}</span></td>
+    <td>${esc(t.field)}</td><td class="n num">${fmt(t.n_rows)}</td>
+    <td>${esc(t.detail)}</td></tr>`).join("")+`</tbody>`;
+
+/* ======================= VERSIONS ======================= */
+(function(){
+  const svg=document.getElementById("growth"), W=900,H=250,L=54,B=46,T=20,R=110;
+  const c=D.diff.counts, min=680, max=790;
+  const x=i=>L+i*((W-L-R)/(c.length-1)), y=v=>H-B-((v-min)/(max-min))*(H-B-T);
+  [700,720,740,760,780].forEach(v=>{
+    svg.appendChild(el("line",{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:"var(--hair)"}));
+    svg.appendChild(el("text",{x:L-9,y:y(v)+4,"text-anchor":"end",fill:"#9AA69F","font-size":11},v));
+  });
+  let d=""; c.forEach((r,i)=>d+=(i?"L":"M")+x(i)+" "+y(r.n));
+  svg.appendChild(el("path",{d,fill:"none",stroke:"var(--melt)","stroke-width":2}));
+  c.forEach((r,i)=>{
+    svg.appendChild(el("circle",{cx:x(i),cy:y(r.n),r:5,fill:"var(--melt)"}));
+    svg.appendChild(el("text",{x:x(i),y:y(r.n)-14,"text-anchor":"middle",
+      fill:"var(--ink)","font-size":13,"font-weight":600},r.n));
+    svg.appendChild(el("text",{x:x(i),y:H-B+19,"text-anchor":"middle",
+      fill:"#69766F","font-size":11.5},r.version));
+    svg.appendChild(el("text",{x:x(i),y:H-B+33,"text-anchor":"middle",
+      fill:"#9AA69F","font-size":10.5},r.date));
+    if(i){const dl=r.n-c[i-1].n;
+      svg.appendChild(el("text",{x:(x(i)+x(i-1))/2,y:y((r.n+c[i-1].n)/2)+22,
+        "text-anchor":"middle",fill:"var(--silt)","font-size":11.5},"+"+dl));}
+  });
+  svg.appendChild(el("text",{x:W-R+16,y:y(766)+4,fill:"var(--muted)","font-size":12},
+    "+69 events since v1.0"));
+})();
+
+document.getElementById("steps").innerHTML = D.diff.steps.map(s=>{
+  const recent = s.new_events.filter(e=>e.Year_approx).slice(-8).reverse();
+  return `<div style="padding:14px 0;border-bottom:1px solid var(--hair)">
+    <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap">
+      <h3 style="margin:0">${s.from} → ${s.to}</h3>
+      <span class="tag">${s.added} added</span>
+      <span class="tag">${s.unmatched} without an exact match</span>
+      <span class="num" style="color:var(--muted);font-size:12.5px">${s.n_from} → ${s.n_to}</span>
+    </div>
+    <details><summary>Newly added events (${s.new_events.length})</summary>
+      <table style="margin-top:8px"><thead><tr><th>Lake</th><th>Country</th><th>Date</th><th>Type</th></tr></thead>
+      <tbody>${s.new_events.map(e=>`<tr><td>${esc(e.Lake_name||"—")}</td><td>${esc(e.Country)}</td>
+        <td class="num">${esc([e.Year_approx,e.Month,e.Day].filter(Boolean).join("-"))||"—"}</td>
+        <td><span class="tag">${esc(e.Lake_type)}</span></td></tr>`).join("")}</tbody></table>
+    </details></div>`;
+}).join("");
+
+document.getElementById("edits").innerHTML =
+  `<thead><tr><th>Field</th><th class="n">Records changed</th><th class="n">Share</th><th>Example</th></tr></thead><tbody>`+
+  D.diff.field_edits.map(f=>`<tr><td>${esc(f.field)}</td><td class="n num">${f.n}</td>
+    <td class="n num">${f.pct}%</td>
+    <td style="font-size:12.5px;color:var(--muted)">${esc(f.examples[0].from)} → <span style="color:var(--ink)">${esc(f.examples[0].to)}</span></td>
+    </tr>`).join("")+`</tbody>`;
+
+document.getElementById("gone").innerHTML =
+  `<thead><tr><th>Release</th><th>Lake</th><th>Country</th><th>Date in old release</th>
+   <th>Closest record in the new one</th><th class="n">Distance</th></tr></thead><tbody>`+
+  D.diff.steps.flatMap(s=>s.unmatched_records.map(r=>`<tr>
+    <td class="num">${s.from}→${s.to}</td>
+    <td>${esc(r.lake)}<br><span style="font-size:12px;color:var(--muted)">${esc(r.glacier)}</span></td>
+    <td>${esc(r.country)}</td>
+    <td class="num">${esc([r.year,r.month,r.day].filter(v=>v&&v!=="nan").join("-"))}</td>
+    <td>${r.verdict==="no nearby record" ? '<span class="sev high">not found</span>' :
+        esc(r.match_lake)+" "+esc([r.match_year,r.match_month,r.match_day].filter(v=>v&&v!=="nan").join("-"))}</td>
+    <td class="n num">${r.km} km</td></tr>`)).join("")+`</tbody>`;
+</script>
+</body>
+</html>
