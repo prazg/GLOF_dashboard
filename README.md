@@ -109,12 +109,3 @@ derived works, also CC BY 4.0. The code is MIT. See `LICENSE` and `LICENSE-DATA.
 
 This repository is an independent review and is not affiliated with or endorsed by ICIMOD.
 
-## Publishing
-
-Enable Pages under **Settings → Pages**. With the included workflow, set the source to
-**GitHub Actions**; to skip the workflow entirely, set it to
-**Deploy from a branch → main → / (root)** and delete `.github/` — `index.html` is committed and
-works as-is.
-
-The build is byte-reproducible: rerunning the pipeline on unchanged inputs produces an identical
-`index.html`, so a diff there always means the data or the code changed.
